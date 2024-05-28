@@ -11,7 +11,7 @@ class Type extends Model
 
     protected $fillable = ['name'];
 
-    //relazione many to many
+    //relazione many to many con projects
     public function projects()
     {
         return $this->belongsToMany(Project::class);
