@@ -55,14 +55,12 @@
         <div class="mb-3">
             <label class="form-label">Tipo</label>
             <div class="btn-group btn-group-sm" role="group">
-
                 @foreach ($types as $type)
                     <input name="types[]" type="checkbox" class="btn-check" id="type_{{ $type->id }}" autocomplete="off"
                         value="{{ $type->id }}" @if (in_array($type->id, old('types', []))) checked @endif>
 
                     <label class="btn btn-outline-primary" for="type_{{ $type->id }}">{{ $type->name }}</label>
                 @endforeach
-
             </div>
         </div>
 
@@ -73,7 +71,6 @@
             @error('title')
                 <p class="text-danger">{{ $message }}</p>
             @enderror
-
         </div>
 
         <div class="mb-3">
