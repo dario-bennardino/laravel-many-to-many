@@ -58,7 +58,7 @@
 
                 @foreach ($types as $type)
                     <input name="types[]" type="checkbox" class="btn-check" id="type_{{ $type->id }}" autocomplete="off"
-                        value="{{ $type->id }}">
+                        value="{{ $type->id }}" @if (in_array($type->id, old('types', []))) checked @endif>
 
                     <label class="btn btn-outline-primary" for="type_{{ $type->id }}">{{ $type->name }}</label>
                 @endforeach
