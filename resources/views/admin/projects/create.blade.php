@@ -50,7 +50,20 @@
                     </option>
                 @endforeach
             </select>
+        </div>
 
+        <div class="mb-3">
+            <label class="form-label">Tipo</label>
+            <div class="btn-group btn-group-sm" role="group">
+
+                @foreach ($types as $type)
+                    <input name="types[]" type="checkbox" class="btn-check" id="type_{{ $type->id }}" autocomplete="off"
+                        value="{{ $type->id }}">
+
+                    <label class="btn btn-outline-primary" for="type_{{ $type->id }}">{{ $type->name }}</label>
+                @endforeach
+
+            </div>
         </div>
 
         <div class="mb-3">

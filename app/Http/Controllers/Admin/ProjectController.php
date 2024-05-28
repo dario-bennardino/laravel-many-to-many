@@ -9,6 +9,7 @@ use App\Functions\Helper as Help;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Type;
 
 
 class ProjectController extends Controller
@@ -37,8 +38,9 @@ class ProjectController extends Controller
     public function create()
     {
         $technologies = Technology::all();
+        $types = Type::all();
 
-        return view('admin.projects.create', compact('technologies'));
+        return view('admin.projects.create', compact('technologies', 'types'));
     }
 
     /**
@@ -66,6 +68,7 @@ class ProjectController extends Controller
 
         $form_data = $request->all();
 
+
         // verifico l'esistenza della chiave 'image' in $form_data
         if (array_key_exists('image', $form_data)) {
             // salvo l'immagine nello store
@@ -73,12 +76,17 @@ class ProjectController extends Controller
             $form_data['image'] = $image_path;
         }
 
-
         $form_data['slug'] = Help::generateSlug($form_data['title'], Project::class);
 
         $new = new Project();
         $new->fill($form_data);
         $new->save();
+
+        // l'associazione many to many deve avvenire dopo il salvataggio del dato nel db
+        // se trovo la chiave types inserisco la relazione nella tabella pivot
+        if (array_key_exists('types', $form_data)) {
+            $new->types()->attach($form_data['types']);
+        }
 
         return redirect()->route('admin.projects.show', $new)->with('success', 'Progetto creato correttamente');
     }
