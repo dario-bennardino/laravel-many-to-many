@@ -9,6 +9,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Project</th>
                 <th scope="col">Technology</th>
+                <th scope="col">Type</th>
                 <th scope="col">Image</th>
                 <th scope="col">Date</th>
                 <th scope="col">Actions</th>
@@ -20,8 +21,19 @@
                     <td>{{ $project->id }}</td>
                     <td>{{ $project->title }}</td>
                     <td>{{ $project->technology?->name ?? '-' }}</td>
-                    {{-- <td>{{ $project->technology->name }}</td> --}}
-                    {{-- <td>{{ $project->image }}</td> --}}
+                    <td>
+                        @forelse ($project->types as $type)
+                            <span class="badge text-bg-warning">{{ $type->name }}</span>
+                        @empty
+                            - no type
+                        @endforelse
+
+                        {{-- @foreach ($project->types as $type)
+                            <span class="badge text-bg-warning">{{ $type->name }}</span>
+                        @endforeach --}}
+
+                    </td>
+
                     <td><img class="img-fluid" src="{{ asset('storage/' . $project->image) }}"
                             style="width: 150px; height: auto;" alt="{{ $project->title }}">
                     </td>
