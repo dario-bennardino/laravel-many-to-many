@@ -10,4 +10,10 @@ class Type extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    //relazione many to many
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
 }
