@@ -1,0 +1,53 @@
+@import '~bootstrap/scss/bootstrap';
+
+header {
+    height: 56px;
+}
+
+.main-wrapper {
+    height: calc(100vh - 56px);
+
+    .content {
+        height: 100%;
+        overflow: auto;
+        width: 100%;
+    }
+
+    // background-color: aqua;
+
+}
+
+aside {
+    width: 180px;
+    flex-shrink: 0;
+
+    ul {
+        list-style: none;
+        padding-left: 15px;
+
+        li {
+            line-height: 40px;
+
+            a {
+                text-decoration: none;
+                color: white;
+                font-size: .9rem;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.crud-table {
+    td:first-child {
+        width: 400px;
+    }
+
+    input {
+        border: none;
+        outline: none;
+    }
+}
