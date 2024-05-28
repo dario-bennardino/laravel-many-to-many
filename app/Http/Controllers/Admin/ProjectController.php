@@ -115,6 +115,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+
         /*
             1. validare il dato
             2. controllare se esiste già
@@ -129,6 +130,7 @@ class ProjectController extends Controller
                 'title' => 'required|min:2|max:100',
                 'description' => 'required',
                 'creation_date' => 'nullable',
+
             ],
             [
                 'title.required' => 'Devi inserire il nome del progetto',
@@ -153,7 +155,13 @@ class ProjectController extends Controller
                 //aggiorno tutte le relazioni eliminando quelle che eventualmente non ci sono più
                 // ->sync() accetta un'array sincronizzando tutte le relazioni
                 $project->type()->sync($val_data['types']);
+
+                // $project->types()->sync($request->input('types', []));
+            } else {
+                // se non sono presenti id dentro types elimino tutte le relazioni con project
+                $project->types()->detach();
             }
+            // $project->update($val_data);
 
             return redirect()->route('admin.projects.index')->with('success', 'Progetto modificato correttamente');
         }
