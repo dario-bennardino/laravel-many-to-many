@@ -149,6 +149,12 @@ class ProjectController extends Controller
             $val_data['creation_date'] = $request->creation_date;
             $project->update($val_data);
 
+            if (array_key_exists('types', $val_data)) {
+                //aggiorno tutte le relazioni eliminando quelle che eventualmente non ci sono più
+                // ->sync() accetta un'array sincronizzando tutte le relazioni
+                $project->type()->sync($val_data['types']);
+            }
+
             return redirect()->route('admin.projects.index')->with('success', 'Progetto modificato correttamente');
         }
     }
