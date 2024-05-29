@@ -144,17 +144,21 @@ class ProjectController extends Controller
         );
 
         // dd($val_data);
+        $exists = Project::where('title', $request->title)->where('id', '!=', $project->id)->first();
+        // $exixts = Project::where('title', $request->title)->first();
 
-        $exixts = Project::where('title', $request->title)->first();
-        if ($exixts) {
+        if ($exists) {
             return redirect()->route('admin.projects.index')->with('error', 'Progetto già esistente');
         } else {
+
+            // dd('primo controllo');
 
             $val_data['slug'] = Help::generateSlug($request->title, Project::class);
             $val_data['description'] = $request->description;
             $val_data['creation_date'] = $request->creation_date;
             $project->update($val_data);
 
+            // dd(array_key_exists('types', $val_data));
             if (array_key_exists('types', $val_data)) {
                 // dd($val_data['types']);
                 //aggiorno tutte le relazioni eliminando quelle che eventualmente non ci sono più
