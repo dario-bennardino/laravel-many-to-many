@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="home-info">
-        <h1>Sono presenti {{ $count_projects }} projects</h1>
+        <h3>Sono presenti {{ $count_projects }} projects</h3>
 
-        <h2>Ultimo progetto:</h2>
+        <h4>Ultimo progetto:</h4>
         <div>
-            <h3>{{ $last_project->title }}</h3>
+            <h4>{{ $last_project->title }}</h4>
             <p>{{ $last_project->description }}</p>
         </div>
     </div>

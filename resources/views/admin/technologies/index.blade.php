@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <div class="my-4">
+    <div class="my-4 input-add">
         <form action="{{ route('admin.technologies.store') }}" method="POST" class="d-flex">
             @csrf
             <input class="form-control me-2" type="search" placeholder="New technologies" name="name">
