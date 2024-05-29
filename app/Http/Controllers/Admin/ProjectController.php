@@ -115,6 +115,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        // dd($request->all());
 
         /*
             1. validare il dato
@@ -130,6 +131,7 @@ class ProjectController extends Controller
                 'title' => 'required|min:2|max:100',
                 'description' => 'required',
                 'creation_date' => 'nullable',
+                'types' => 'nullable|array'
 
             ],
             [
@@ -140,6 +142,8 @@ class ProjectController extends Controller
 
             ]
         );
+
+        // dd($val_data);
 
         $exixts = Project::where('title', $request->title)->first();
         if ($exixts) {
@@ -152,13 +156,15 @@ class ProjectController extends Controller
             $project->update($val_data);
 
             if (array_key_exists('types', $val_data)) {
+                // dd($val_data['types']);
                 //aggiorno tutte le relazioni eliminando quelle che eventualmente non ci sono più
                 // ->sync() accetta un'array sincronizzando tutte le relazioni
-                $project->type()->sync($val_data['types']);
+                $project->types()->sync($val_data['types']);
 
                 // $project->types()->sync($request->input('types', []));
             } else {
                 // se non sono presenti id dentro types elimino tutte le relazioni con project
+                // dd('Detaching all types');
                 $project->types()->detach();
             }
             // $project->update($val_data);
