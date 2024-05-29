@@ -1,11 +1,23 @@
 @import '~bootstrap/scss/bootstrap';
 
+body {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
 header {
-    height: 56px;
+    // height: 56px;
+    height: 75px;
+
+    .navbar {
+        height: 75px;
+    }
 }
 
 .main-wrapper {
-    height: calc(100vh - 56px);
+    // height: calc(100vh - 56px);
+    height: calc(100vh - 75px);
 
     .content {
         height: 100%;
@@ -32,6 +44,10 @@ aside {
                 text-decoration: none;
                 color: white;
                 font-size: .9rem;
+
+                .fa-solid {
+                    margin-right: 7px;
+                }
 
                 &:hover {
                     text-decoration: underline;
